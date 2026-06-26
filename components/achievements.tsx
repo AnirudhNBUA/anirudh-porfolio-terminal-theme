@@ -10,8 +10,8 @@ const ITEMS = [
     body: "Recognized as best employee at Accenture for outstanding product contributions and promoted to Senior.",
   },
   {
-    title: "Revenue Growth",
-    body: "Drove ~25% product revenue uplift in 3 months via a CrewAI multi-agent feature launch.",
+    title: "50% SDLC Time Reduction",
+    body: "GenAI-powered automation suite cut prototype turnaround by 50% and dev cycle by 30% across product teams.",
   },
 ]
 
@@ -22,7 +22,7 @@ export function Achievements() {
         ~/achievements
       </h2>
       <TerminalWindow title="git log --oneline --stat" command="git log --achievements">
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
           {ITEMS.map((it) => (
             <div
               key={it.title}

@@ -27,8 +27,8 @@ const ROLES: Role[] = [
     ],
     bullets: [
       "Build & operate ESG ODS Services, ingesting 5–20 GB/day from 12+ vendors (MSCI, ISS, Sustainalytics, FactSet) into Snowflake for 1000+ investment users firmwide.",
-      "Designed a 6-stage daily KPI pipeline (validation, issuer resolution, KPI mapping, country normalization, staging, bitemporal publishing) orchestrated via Autosys — resumable from the last successful stage on failure.",
-      "Built a FastAPI REST API with 13 domain routers + a Streamlit ops dashboard for uploads, run monitoring, and rollbacks, secured with role-based access.",
+      "Designed a 6-stage daily KPI pipeline (validation, issuer resolution, KPI mapping, country normalization, staging, bitemporal publishing) orchestrated via Autosys with 99.9% reliability — resumable from the last successful stage on failure.",
+      "Built a FastAPI REST API with 13 domain routers serving processed ESG metrics with sub-100ms response times, plus a Streamlit ops dashboard for uploads, run monitoring, and rollbacks — secured with role-based access.",
       "Inducted into the firm's AI Development Platform (AIDP) team within 2 months; authored reusable agent skills for Git/GitHub, Jira, Jenkins, Snowflake & Sourcegraph CLI for spec-driven development.",
     ],
   },

@@ -3,7 +3,7 @@ import { TerminalWindow } from "@/components/terminal-window"
 const GROUPS: { key: string; items: string[] }[] = [
   {
     key: "languages_core",
-    items: ["Python", "Java", "JavaScript", "SQL", "Bash", "DSA"],
+    items: ["Python", "JavaScript", "SQL", "Bash"],
   },
   {
     key: "backend",
@@ -13,19 +13,22 @@ const GROUPS: { key: string; items: string[] }[] = [
       "NodeJS",
       "Express",
       "Pydantic",
-      "SQLModel",
+      "SQL",
       "Pandas",
+      "Jinja2",
     ],
   },
   {
     key: "ai_llm",
     items: [
+      "Machine Learning",
+      "Deep learning",
       "LangChain",
       "LangGraph",
       "CrewAI",
       "Autogen",
       "Agentic AI",
-      "OpenAI GPT-4",
+      "Agentic skills",
       "Scikit-learn",
       "Prompt Engineering",
     ],
@@ -53,6 +56,8 @@ const CERTS = [
   "AWS Certified Cloud Practitioner",
   "Microsoft Certified: Azure Fundamentals",
   "Microsoft Certified: Azure AI Fundamentals",
+  "Microsoft Certified: Azure Administrator Associate",
+  "Microsoft Certified: Azure Solutions Architect Expert",
   "Google Cloud Digital Cloud Leader",
   "Google Cloud Associate Cloud Engineer",
 ]

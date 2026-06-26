@@ -60,6 +60,23 @@ const PROJECTS: Project[] = [
       },
     ],
   },
+  {
+    name: "Mapty",
+    tagline: "Geo-location Workout Tracker",
+    description:
+      "OOP-driven workout tracker that pins running and cycling sessions on an interactive Leaflet.js map using the browser's Geolocation API. Workouts persist across sessions via localStorage.",
+    stack: ["JavaScript", "Leaflet.js", "Geolocation API", "OOP", "CSS"],
+    links: [
+      {
+        label: "github",
+        href: "https://github.com/AnirudhNBUA/mapty-workout-tracker",
+      },
+      {
+        label: "live",
+        href: "https://anirudhnbua.github.io/mapty-workout-tracker/",
+      },
+    ],
+  },
 ]
 
 export function Projects() {
