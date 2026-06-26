@@ -1,11 +1,15 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Mail, Phone } from "lucide-react"
 import { TypeLine } from "@/components/type-line"
 import { HeroGlobe } from "@/components/globe"
 
 const TAGS = ["Python", "Snowflake", "LLMs", "Multi-Agent Systems"]
+
+type HeroProps = {
+  onReady?: () => void
+}
 
 function GithubGlyph() {
   return (
@@ -33,132 +37,138 @@ function LinkedinGlyph() {
   )
 }
 
-export function Hero() {
+export function Hero({ onReady }: HeroProps) {
   const [step, setStep] = useState(0)
 
+  useEffect(() => {
+    if (step >= 3) onReady?.()
+  }, [step, onReady])
+
   return (
-    <header className="relative flex min-h-[100svh] items-center py-20">
+    <header className="relative flex min-h-[100svh] items-start py-14 sm:py-16 lg:items-center lg:py-20">
       {/* full-bleed solid black backdrop — hides the page dot-map within the hero */}
       <div
         className="absolute inset-y-0 z-0 bg-background"
         style={{ left: "calc(50% - 50vw)", width: "100vw" }}
       />
 
-      {/* globe layer: massive hemisphere bleeding off the right screen edge */}
-      <div
-        className={`pointer-events-none absolute inset-y-0 z-0 hidden overflow-hidden lg:block ${
-          step >= 3 ? "animate-fade-up" : "opacity-0"
-        }`}
-        style={{
-          right: "calc(50% - 50vw)",
-          width: "60vw",
-          animationDelay: "220ms",
-        }}
-      >
-        <HeroGlobe />
-      </div>
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-8 lg:flex-row lg:items-center lg:gap-0">
+        {/* left column: boot sequence + content */}
+        <div className="w-full lg:w-1/2 lg:pr-10">
+          {/* boot sequence */}
+          <div className="mb-8 font-mono text-sm text-muted-foreground">
+            <p>
+              <TypeLine
+                text="> executing profile.sh"
+                speed={34}
+                className="text-neon"
+                onDone={() => setStep(1)}
+              />
+            </p>
+            {step >= 1 && (
+              <p className="mt-1">
+                <TypeLine
+                  text="> mounting /home/anirudh ... ok"
+                  speed={18}
+                  onDone={() => setStep(2)}
+                />
+              </p>
+            )}
+            {step >= 2 && (
+              <p className="mt-1">
+                <TypeLine
+                  text="> initializing portfolio --mode=dark"
+                  speed={18}
+                  cursor={false}
+                  onDone={() => setStep(3)}
+                />
+              </p>
+            )}
+          </div>
 
-      {/* left column: boot sequence + content */}
-      <div className="relative z-10 w-full lg:w-1/2 lg:pr-10">
-      {/* boot sequence */}
-      <div className="mb-8 font-mono text-sm text-muted-foreground">
-        <p>
-          <TypeLine
-            text="> executing profile.sh"
-            speed={34}
-            className="text-neon"
-            onDone={() => setStep(1)}
-          />
-        </p>
-        {step >= 1 && (
-          <p className="mt-1">
-            <TypeLine
-              text="> mounting /home/anirudh ... ok"
-              speed={18}
-              onDone={() => setStep(2)}
-            />
-          </p>
-        )}
-        {step >= 2 && (
-          <p className="mt-1">
-            <TypeLine
-              text="> initializing portfolio --mode=dark"
-              speed={18}
-              cursor={false}
-              onDone={() => setStep(3)}
-            />
-          </p>
-        )}
-      </div>
+          <div
+            className={step >= 3 ? "animate-fade-up" : "opacity-0"}
+            style={{ animationDelay: "60ms" }}
+          >
+            <h1 className="text-balance text-4xl font-bold leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl">
+              Anirudh B K
+            </h1>
 
-      <div
-        className={step >= 3 ? "animate-fade-up" : "opacity-0"}
-        style={{ animationDelay: "60ms" }}
-      >
-        <h1 className="text-balance text-5xl font-bold leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
-          Anirudh B K
-        </h1>
+            <p className="mt-5 font-mono text-base text-electric sm:text-lg">
+              [ AI/Data Engineer ]
+            </p>
 
-        <p className="mt-5 font-mono text-base text-electric sm:text-lg">
-          [ AI/Data Engineer ]
-        </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {TAGS.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-md border border-border bg-secondary/30 px-3 py-1 font-mono text-xs text-foreground/80"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {TAGS.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md border border-border bg-secondary/30 px-3 py-1 font-mono text-xs text-foreground/80"
+            <p className="mt-8 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
+              ~3 years building data platforms and LLM-driven backends.
+              Currently engineering ESG data pipelines at{" "}
+              <span className="text-foreground">Morgan Stanley</span>, serving
+              1000+ investment users firmwide on Snowflake and FastAPI.
+            </p>
+
+            <nav
+              aria-label="Contact links"
+              className="mt-8 flex flex-wrap items-center gap-4 font-mono text-sm"
             >
-              {tag}
-            </span>
-          ))}
+              <a
+                href="mailto:anirudhnbua@gmail.com"
+                className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-neon"
+              >
+                <Mail className="size-4" aria-hidden="true" />
+                anirudhnbua@gmail.com
+              </a>
+              <a
+                href="tel:+918688456460"
+                className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-neon"
+              >
+                <Phone className="size-4" aria-hidden="true" />
+                +91-8688456460
+              </a>
+              <a
+                href="https://github.com/AnirudhNBUA"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-neon"
+              >
+                <GithubGlyph />
+                github
+              </a>
+              <a
+                href="https://linkedin.com/in/anirudh-b-k"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-neon"
+              >
+                <LinkedinGlyph />
+                linkedin
+              </a>
+            </nav>
+          </div>
         </div>
 
-        <p className="mt-8 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
-          ~3 years building data platforms and LLM-driven backends. Currently
-          engineering ESG data pipelines at{" "}
-          <span className="text-foreground">Morgan Stanley</span>, serving 1000+
-          investment users firmwide on Snowflake and FastAPI.
-        </p>
-
-        <nav
-          aria-label="Contact links"
-          className="mt-8 flex flex-wrap items-center gap-4 font-mono text-sm"
+        {/* globe layer: stacked on mobile, massive hemisphere on desktop */}
+        <div
+          className={`pointer-events-none relative -mx-5 h-[42svh] overflow-hidden sm:-mx-8 lg:mx-0 lg:h-[100svh] lg:flex-1 lg:self-stretch lg:overflow-visible ${
+            step >= 3 ? "animate-fade-up" : "opacity-0"
+          }`}
+          style={{ animationDelay: "220ms" }}
         >
-          <a
-            href="mailto:anirudhnbua@gmail.com"
-            className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-neon"
+          <div
+            className="absolute inset-0 lg:inset-y-0 lg:right-[calc(50%-50vw)] lg:left-auto lg:w-[60vw]"
           >
-            <Mail className="size-4" aria-hidden="true" />
-            anirudhnbua@gmail.com
-          </a>
-          <a
-            href="tel:+918688456460"
-            className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-neon"
-          >
-            <Phone className="size-4" aria-hidden="true" />
-            +91-8688456460
-          </a>
-          <a
-            href="https://github.com/AnirudhNBUA"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-neon"
-          >
-            <GithubGlyph />
-            github
-          </a>
-          <a
-            href="https://linkedin.com/in/anirudh-b-k"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-neon"
-          >
-            <LinkedinGlyph />
-            linkedin
-          </a>
-        </nav>
-      </div>
+            <HeroGlobe />
+          </div>
+        </div>
       </div>
     </header>
   )

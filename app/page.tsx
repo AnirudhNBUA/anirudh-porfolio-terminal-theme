@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import { DotMap } from "@/components/dot-map"
 import { Hero } from "@/components/hero"
 import { Experience } from "@/components/experience"
@@ -7,14 +10,21 @@ import { Achievements } from "@/components/achievements"
 import { TerminalWindow } from "@/components/terminal-window"
 
 export default function Page() {
+  const [heroReady, setHeroReady] = useState(false)
+
   return (
     <div className="relative min-h-screen overflow-x-clip bg-background text-foreground">
       <DotMap />
 
       <main className="relative z-10 mx-auto w-full max-w-5xl px-5 sm:px-8">
-        <Hero />
+        <Hero onReady={() => setHeroReady(true)} />
 
-        <div className="space-y-20 pb-24">
+        <div
+          className={`space-y-20 pb-24 transition-opacity duration-500 ${
+            heroReady ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+          aria-hidden={!heroReady}
+        >
           <Experience />
           <Projects />
           <Skills />

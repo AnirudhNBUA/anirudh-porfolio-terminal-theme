@@ -23,6 +23,9 @@ export function HeroGlobe() {
   const globeSize = useMemo(() => {
     const { w, h } = box
     if (!w || !h) return 0
+    if (w < 640) {
+      return Math.round(Math.min(w, h) * 0.92)
+    }
     return Math.round(Math.max(h * 1.55, w * 1.15))
   }, [box])
 
@@ -30,6 +33,12 @@ export function HeroGlobe() {
   const offset = useMemo(() => {
     const { w, h } = box
     if (!globeSize) return { left: 0, top: 0 }
+    if (w < 640) {
+      return {
+        left: Math.round((w - globeSize) / 2),
+        top: Math.round((h - globeSize) / 2),
+      }
+    }
     return {
       left: Math.round(w * 0.74 - globeSize / 2),
       top: Math.round(h * 0.5 - globeSize / 2),
