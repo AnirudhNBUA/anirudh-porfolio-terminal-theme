@@ -3,3 +3,5 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - '@types/three@0.185.0'
   - three@0.185.0
+overrides:
+  "hono": "4.12.25"
